@@ -1,30 +1,31 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+  <div>
+    <h2>{{$store.state.moduleA.name}}</h2>
+    <h2>{{$store.getters.newName}}</h2>
+
+    <h2>{{$store.state.moduleB.name}}</h2>
+    <h2>{{$store.getters['moduleB/newName']}}</h2>
+
+    <h2 @click="chageName">点我</h2>
   </div>
-  <router-view/>
 </template>
+<script>
+import { useStore } from "vuex"
+
+export default {
+  setup() {
+  const store = useStore()
+  const chageName = () => {
+    //  store.commit('moduleB/chageName')
+    store.dispatch('moduleB/layChange')
+  }
+  return { chageName }
+}
+
+}
+</script>
+
 
 <style lang="less">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
 
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
 </style>
